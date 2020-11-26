@@ -7,10 +7,11 @@ class Header extends Component {
   render() {
     return (
       <header className='header'>
-        <div className='header__logo'>
+        <div className='header__content'>
+          <div className='header__logo'>
           <img src={Logo} alt='logo' />
         </div>
-        <nav className='header__nav'>
+          <nav className='header__nav'>
           <ul className='header__nav-list'>
             <li className='header__nav-list-item'>
               <button onClick={() => {
@@ -35,6 +36,7 @@ class Header extends Component {
             </li>
           </ul>
         </nav>
+        </div>
       </header>
     );
   }
