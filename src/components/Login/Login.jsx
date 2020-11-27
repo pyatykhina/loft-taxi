@@ -1,10 +1,15 @@
 import { Component } from 'react';
+import PropTypes from "prop-types";
 import './Login.scss';
 
 class Login extends Component {
   state = {
     login: '',
     password: ''
+  }
+
+  static propTypes = {
+    navigate: PropTypes.func
   }
 
   handleSubmit = e => {

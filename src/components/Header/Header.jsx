@@ -1,9 +1,14 @@
 import { Component } from 'react';
+import PropTypes from "prop-types";
 import './Header.scss';
 
 import Logo from '../../images/logo.png';
 
 class Header extends Component {
+  static propTypes = {
+    navigate: PropTypes.func
+  }
+
   render() {
     return (
       <header className='header'>

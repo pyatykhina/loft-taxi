@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import mapboxgl from 'mapbox-gl';
 import './Map.scss';
 
@@ -8,6 +9,10 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.mapContainer = React.createRef();
+  }
+  
+  static propTypes = {
+    navigate: PropTypes.func
   }
  
   componentDidMount() {

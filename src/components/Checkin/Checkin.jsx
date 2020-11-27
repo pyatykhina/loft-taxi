@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from "prop-types";
 import './Checkin.scss';
 
 class Checkin extends Component {
@@ -7,6 +8,10 @@ class Checkin extends Component {
     firstName: '',
     lastName: '',
     password: ''
+  }
+
+  static propTypes = {
+    navigate: PropTypes.func
   }
 
   handleSubmit = e => {
