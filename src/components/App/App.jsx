@@ -6,6 +6,14 @@ import Login from '../Login';
 import Checkin from '../Checkin';
 import Map from '../Map';
 import Profile from '../Profile';
+import { withAuth } from '../../AuthContext';
+
+const PAGES = {
+  login: (props) => <Login {...props} />,
+  checkin: (props) => <Checkin {...props} />,
+  map: (props) => <Map {...props} />,
+  profile: (props) => <Profile {...props} />
+}
 
 class App extends Component {
   state = {
@@ -13,20 +21,23 @@ class App extends Component {
   }
 
   navigateTo = (page) => {
-    this.setState({currentPage: page})
+    if (this.props.isLoggedIn) {
+      this.setState({currentPage: page})
+    } else if (page === 'checkin') {
+      this.setState({currentPage: 'checkin'})
+    } else {
+      this.setState({currentPage: 'login'})
+    }
   }
 
   render() {
     return (
       <div className='wrapper'>
-        <Header navigate={this.navigateTo}/>
+        <Header navigate={this.navigateTo} />
 
         <main>
           <section>
-            {this.state.currentPage === 'login' && <Login navigate={this.navigateTo}/>}
-            {this.state.currentPage === 'checkin' && <Checkin navigate={this.navigateTo}/>}
-            {this.state.currentPage === 'map' && <Map/>}
-            {this.state.currentPage === 'profile' && <Profile/>}
+            {PAGES[this.state.currentPage]({navigate: this.navigateTo})}
           </section>
         </main>
       </div>
@@ -34,4 +45,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAuth(App);
