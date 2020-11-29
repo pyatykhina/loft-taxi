@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import mapboxgl from 'mapbox-gl';
 import './Map.scss';
 
@@ -8,6 +8,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicHlhdHlraGluYSIsImEiOiJja2h6MDF6NjgybGZxMnBre
 class Map extends Component {
   constructor(props) {
     super(props);
+    this.map = null;
     this.mapContainer = React.createRef();
   }
   
@@ -30,7 +31,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div ref={this.mapContainer} className="mapContainer" />
+      <div ref={this.mapContainer} data-testid="map" className="mapContainer" />
     );
   }
 }
