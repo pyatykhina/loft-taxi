@@ -2,8 +2,6 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import Checkin from './index';
 
-jest.mock('../Login', () => ({ Login: () => <div>Login component</div> }));
-
 describe('Checkin', () => {
     it('renders correctly', () => {
         const { getByLabelText  } = render(<Checkin />);
@@ -15,10 +13,11 @@ describe('Checkin', () => {
 
     describe('when clicked on login button', () => {
         it('opens the login page', () => {
-            const {getByText, container} = render(<Checkin />);
+            const navigate = jest.fn();
+            const {getByText, container} = render(<Checkin navigate={navigate} />);
 
             fireEvent.click(getByText('Войти'));
-            expect(container.innerHTML).toMatch('Login component');
+            expect(navigate).toHaveBeenCalledWith('login');
         });
     })
 })

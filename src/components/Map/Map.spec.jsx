@@ -3,8 +3,8 @@ import { render } from '@testing-library/react';
 import mapboxgl from "mapbox-gl";
 import Map from './index';
 
-jest.mock("mapbox-gl", () => ({
-    Map: jest.fn(() => ({ remove: () => {} })),
+jest.mock('mapbox-gl', () => ({
+    Map: jest.fn(() => ({ remove: () => {} }))
 }));
 
 describe('Map', () => {
@@ -14,7 +14,7 @@ describe('Map', () => {
             container: getByTestId('map'),
             style: "mapbox://styles/pyatykhina/ckhz0q8o112of19qqobazgwvx",
             center: [30.315, 59.940],
-            zoom: 12,
+            zoom: 12
         });
     })
 })
