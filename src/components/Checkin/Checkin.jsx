@@ -1,5 +1,8 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Checkin.scss';
+
+import { withAuth } from '../../AuthContext';
 
 class Checkin extends Component {
   state = {
@@ -9,8 +12,14 @@ class Checkin extends Component {
     password: ''
   }
 
-  handleSubmit = e => {
+  static propTypes = {
+    navigate: PropTypes.func
+  }
+
+  authenticate = e => {
     e.preventDefault();
+    const {email, password} = e.target ;
+    this.props.logIn(email.value, password.value); 
     this.props.navigate('map');
   };
 
@@ -25,7 +34,7 @@ class Checkin extends Component {
         }>
           Войти
         </button>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.authenticate}>
           <label>
             Адрес электронной почты
             <input 
@@ -69,4 +78,4 @@ class Checkin extends Component {
   }
 }
 
-export default Checkin;
+export default withAuth(Checkin);
