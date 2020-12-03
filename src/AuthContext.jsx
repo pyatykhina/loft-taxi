@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 export const AuthContext = React.createContext();
 
@@ -38,3 +39,18 @@ export const withAuth = (WrappedComponent) => {
         }
     }
 }
+
+export const PrivateRoute = withAuth(({
+    component: RouteComponent, 
+    isLoggedIn
+}) => (
+    <Route
+      render={routeProps =>
+        isLoggedIn ? (
+          <RouteComponent {...routeProps} />
+        ) : (
+          <Redirect to='/' />
+        )
+      }
+    />
+));

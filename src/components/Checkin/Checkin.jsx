@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
 import './Checkin.scss';
 
 import { withAuth } from '../../AuthContext';
+import { Link, Redirect } from 'react-router-dom';
 
 class Checkin extends Component {
   state = {
@@ -12,15 +12,11 @@ class Checkin extends Component {
     password: ''
   }
 
-  static propTypes = {
-    navigate: PropTypes.func
-  }
-
   authenticate = e => {
     e.preventDefault();
     const {email, password} = e.target ;
     this.props.logIn(email.value, password.value); 
-    this.props.navigate('map');
+    <Redirect to='/map' />
   };
 
   render() {
@@ -29,11 +25,7 @@ class Checkin extends Component {
       <>
         <h2>Регистрация</h2>
         <>Уже зарегистрирован?</>
-        <button onClick={() => {
-          this.props.navigate('login')}
-        }>
-          Войти
-        </button>
+        <Link to='/'>Войти</Link>
         <form onSubmit={this.authenticate}>
           <label>
             Адрес электронной почты

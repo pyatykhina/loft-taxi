@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { withAuth, PrivateRoute } from '../../AuthContext';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.scss';
 
 import Header from '../Header';
@@ -6,38 +8,22 @@ import Login from '../Login';
 import Checkin from '../Checkin';
 import Map from '../Map';
 import Profile from '../Profile';
-import { withAuth } from '../../AuthContext';
-
-const PAGES = {
-  login: (props) => <Login {...props} />,
-  checkin: (props) => <Checkin {...props} />,
-  map: (props) => <Map {...props} />,
-  profile: (props) => <Profile {...props} />
-}
 
 class App extends Component {
-  state = {
-    currentPage: 'login'
-  }
-
-  navigateTo = (page) => {
-    if (this.props.isLoggedIn) {
-      this.setState({currentPage: page})
-    } else if (page === 'checkin') {
-      this.setState({currentPage: 'checkin'})
-    } else {
-      this.setState({currentPage: 'login'})
-    }
-  }
-
   render() {
     return (
       <div className='wrapper'>
-        <Header navigate={this.navigateTo} />
+        <Header />
 
         <main>
           <section>
-            {PAGES[this.state.currentPage]({navigate: this.navigateTo})}
+            <Switch>
+              <Route path='/' exact component={Login} />
+              <Route path='/checkin' component={Checkin} />
+              <PrivateRoute path='/map' component={Map} />
+              <PrivateRoute path='/profile' component={Profile} />
+              <Redirect from='*' to='/' />
+            </Switch>
           </section>
         </main>
       </div>

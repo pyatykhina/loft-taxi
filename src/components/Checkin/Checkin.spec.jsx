@@ -1,10 +1,11 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 import Checkin from './index';
 
 describe('Checkin', () => {
     it('renders correctly', () => {
-        const { getByLabelText  } = render(<Checkin />);
+        const { getByLabelText  } = render(<BrowserRouter><Checkin /></BrowserRouter>);
         expect(getByLabelText('Адрес электронной почты')).toHaveAttribute('name', 'email');
         expect(getByLabelText('Имя')).toHaveAttribute('name', 'firstName');
         expect(getByLabelText('Фамилия')).toHaveAttribute('name', 'lastName');
@@ -13,11 +14,11 @@ describe('Checkin', () => {
 
     describe('when clicked on login button', () => {
         it('opens the login page', () => {
-            const navigate = jest.fn();
-            const {getByText, container} = render(<Checkin navigate={navigate} />);
+            window.location= jest.fn();
+            const {getByText} = render(<BrowserRouter><Checkin /></BrowserRouter>);
 
             fireEvent.click(getByText('Войти'));
-            expect(navigate).toHaveBeenCalledWith('login');
+            expect(window.location.pathname).toBe('/');
         });
     })
 })
