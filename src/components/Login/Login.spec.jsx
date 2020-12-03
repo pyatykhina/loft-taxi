@@ -6,8 +6,8 @@ import Login from './index';
 describe('Login', () => {
     it('renders correctly', () => {
       const { getByLabelText  } = render(<BrowserRouter><Login /></BrowserRouter>);
-      expect(getByLabelText('Имя пользователя')).toHaveAttribute('name', 'email');
-      expect(getByLabelText('Пароль')).toHaveAttribute('name', 'password');
+      expect(getByLabelText('Имя пользователя*')).toHaveAttribute('name', 'email');
+      expect(getByLabelText('Пароль*')).toHaveAttribute('name', 'password');
     })
 
     describe('when clicked on checkin button', () => {

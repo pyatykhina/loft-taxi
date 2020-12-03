@@ -17,13 +17,13 @@ class Header extends Component {
           <nav className='header__nav'>
             <ul className='header__nav-list'>
               <li className='header__nav-list-item'>
-                <Link to='/map'>Карта</Link>
+                <Link to='/map' className='header__nav-list-item-link'>Карта</Link>
               </li>
               <li className='header__nav-list-item'>
-                <Link to='/profile'>Профиль</Link>
+                <Link to='/profile' className='header__nav-list-item-link'>Профиль</Link>
               </li>
               <li className='header__nav-list-item'>
-                <Link to='/' onClick={this.unauthenticate}>Выйти</Link>
+                <Link to='/' onClick={this.unauthenticate} className='header__nav-list-item-link'>Выйти</Link>
               </li>
             </ul>
           </nav>

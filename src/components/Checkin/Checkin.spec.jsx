@@ -6,10 +6,10 @@ import Checkin from './index';
 describe('Checkin', () => {
     it('renders correctly', () => {
         const { getByLabelText  } = render(<BrowserRouter><Checkin /></BrowserRouter>);
-        expect(getByLabelText('Адрес электронной почты')).toHaveAttribute('name', 'email');
-        expect(getByLabelText('Имя')).toHaveAttribute('name', 'firstName');
-        expect(getByLabelText('Фамилия')).toHaveAttribute('name', 'lastName');
-        expect(getByLabelText('Пароль')).toHaveAttribute('name', 'password');
+        expect(getByLabelText('Адрес электронной почты*')).toHaveAttribute('name', 'email');
+        expect(getByLabelText('Имя*')).toHaveAttribute('name', 'firstName');
+        expect(getByLabelText('Фамилия*')).toHaveAttribute('name', 'lastName');
+        expect(getByLabelText('Пароль*')).toHaveAttribute('name', 'password');
     })
 
     describe('when clicked on login button', () => {

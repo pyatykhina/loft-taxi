@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { withAuth, PrivateRoute } from '../../AuthContext';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.scss';
+import Logo from '../../images/logo.svg';
 
-import Header from '../Header';
 import Login from '../Login';
 import Checkin from '../Checkin';
 import Map from '../Map';
@@ -13,9 +13,8 @@ class App extends Component {
   render() {
     return (
       <div className='wrapper'>
-        <Header />
-
         <main>
+          <img src={Logo} alt='Logo' className='logo' />
           <section>
             <Switch>
               <Route path='/' exact component={Login} />

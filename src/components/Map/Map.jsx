@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 import './Map.scss';
+import Header from '../Header';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicHlhdHlraGluYSIsImEiOiJja2h6MDF6NjgybGZxMnBrejI0NWFpZ2tpIn0.AG-o6CiLmJ9ssaWs0tLSZA';
 
@@ -25,7 +26,10 @@ class Map extends Component {
 
   render() {
     return (
-      <div ref={this.mapContainer} data-testid="map" className="mapContainer" />
+      <>
+        <Header />
+        <div ref={this.mapContainer} data-testid="map" className="mapContainer" />
+      </>
     );
   }
 }
