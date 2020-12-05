@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import { withAuth, PrivateRoute } from '../../AuthContext';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logIn, logOut } from '../../actions';
 import './App.scss';
 import Logo from '../../images/logo.svg';
 
@@ -8,6 +9,26 @@ import Login from '../Login';
 import Checkin from '../Checkin';
 import Map from '../Map';
 import Profile from '../Profile';
+
+const PrivateRoute = connect(
+  (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+  { logIn, logOut }
+)(({
+  component: RouteComponent, 
+  isLoggedIn,
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    render={routeProps =>
+      isLoggedIn ? (
+        <RouteComponent {...routeProps} />
+      ) : (
+        <Redirect to='/' />
+      )
+    }
+  />
+));
 
 class App extends Component {
   render() {
@@ -30,4 +51,6 @@ class App extends Component {
   }
 }
 
-export default withAuth(App);
+export default connect(
+  (state) => ({isLoggedIn: state.auth.isLoggedIn})
+)(App);

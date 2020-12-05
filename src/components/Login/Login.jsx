@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import './Login.scss';
-
-import { withAuth } from '../../AuthContext';
 import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { authenticate } from '../../actions';
+import './Login.scss';
 
 import FormLabel from '@material-ui/core/FormLabel';
 import Input from '@material-ui/core/Input';
@@ -16,7 +16,7 @@ class Login extends Component {
   authenticate = e => {
     e.preventDefault();
     const {email, password} = e.target ;
-    this.props.logIn(email.value, password.value); 
+    this.props.authenticate(email.value, password.value); 
   };
  
   render() {
@@ -54,4 +54,7 @@ class Login extends Component {
   }
 }
 
-export default withAuth(Login);
+export default connect(
+  (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+  { authenticate }
+)(Login);

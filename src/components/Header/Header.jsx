@@ -1,8 +1,9 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logOut } from '../../actions';
 import './Header.scss';
 import { Logo } from 'loft-taxi-mui-theme';
-import { withAuth } from '../../AuthContext';
-import { Link } from 'react-router-dom';
 
 class Header extends Component {
   unauthenticate = () => {
@@ -33,4 +34,7 @@ class Header extends Component {
   }
 }
 
-export default withAuth(Header);
+export default connect(
+  null,
+  { logOut }
+)(Header);

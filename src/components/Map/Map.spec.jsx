@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import mapboxgl from "mapbox-gl";
@@ -10,7 +11,18 @@ jest.mock('mapbox-gl', () => ({
 
 describe('Map', () => {
     it('renders correctly', () => {
-        const { getByTestId } = render(<BrowserRouter><Map /></BrowserRouter>);
+        const mockStore = {
+            getState: () => ({auth: {isLoggedIn: false}}),
+            subscribe: () => {},
+            dispatch: () => {}
+        }
+        const { getByTestId } = render(
+            <BrowserRouter>
+                <Provider store={mockStore}>
+                    <Map />
+                </Provider>
+            </BrowserRouter>
+        );
         expect(mapboxgl.Map).toHaveBeenCalledWith({
             container: getByTestId('map'),
             style: "mapbox://styles/pyatykhina/ckhz0q8o112of19qqobazgwvx",

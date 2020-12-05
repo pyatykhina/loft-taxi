@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import './Checkin.scss';
-
-import { withAuth } from '../../AuthContext';
 import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { checkin } from '../../actions';
+import './Checkin.scss';
 
 import FormLabel from '@material-ui/core/FormLabel';
 import Input from '@material-ui/core/Input';
@@ -17,15 +17,15 @@ class Checkin extends Component {
 
   authenticate = e => {
     e.preventDefault();
-    const {email, password} = e.target ;
-    this.props.logIn(email.value, password.value); 
-    <Redirect to='/map' />
+    const {email, firstName, lastName, password} = e.target ;
+    this.props.checkin(email.value, firstName.value, lastName.value, password.value); 
   };
 
   render() {
     const { email, firstName, lastName, password } = this.state;
     return (
       <div className='form'> 
+        {this.props.isLoggedIn && < Redirect to='/map' />}
         <h2>Регистрация</h2>
         Уже зарегистрирован?  <Link to='/'>Войти</Link>
         <form onSubmit={this.authenticate} className='checkin'>
@@ -78,4 +78,7 @@ class Checkin extends Component {
   }
 }
 
-export default withAuth(Checkin);
+export default connect(
+  (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+  { checkin }
+)(Checkin);
