@@ -1,3 +1,9 @@
+.login-form {
+  right: 50%;
+  top: 50%;
+  transform: translate(100%, -50%);
+}
+
 .login {
     display: flex;
     flex-direction: column;

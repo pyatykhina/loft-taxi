@@ -24,7 +24,7 @@ class Checkin extends Component {
   render() {
     const { email, firstName, lastName, password } = this.state;
     return (
-      <div className='form'> 
+      <div className='form checkin-form'> 
         {this.props.isLoggedIn && < Redirect to='/map' />}
         <h2>Регистрация</h2>
         Уже зарегистрирован?  <Link to='/'>Войти</Link>

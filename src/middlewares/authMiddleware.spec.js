@@ -1,8 +1,8 @@
 import { authMiddleware } from './authMiddleware';
-import { authenticate, checkin } from './actions';
-import { serverLogin, serverCheckin } from './api';
+import { authenticate, checkin } from '../actions';
+import { serverLogin, serverCheckin } from '../api';
 
-jest.mock('./api', () => ({ 
+jest.mock('../api', () => ({ 
   serverLogin: jest.fn(() => true),
   serverCheckin: jest.fn(() => true)
 }));

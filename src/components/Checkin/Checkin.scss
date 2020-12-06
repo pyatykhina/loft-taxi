@@ -1,3 +1,9 @@
+.checkin-form {
+    right: 50%;
+    top: 50%;
+    transform: translate(100%, -50%);
+}
+  
 .checkin {
     display: flex;
     flex-direction: column;

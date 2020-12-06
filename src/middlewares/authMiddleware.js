@@ -1,6 +1,6 @@
-import { logIn } from './actions';
-import { serverLogin, serverCheckin } from './api';
-import { AUTHENTICATE, CHECKIN } from './actions'
+import { logIn } from '../actions';
+import { serverLogin, serverCheckin } from '../api';
+import { AUTHENTICATE, CHECKIN } from '../actions'
 
 export const authMiddleware = (store) => (next) => async (action) => {
     if(action.type === AUTHENTICATE) {

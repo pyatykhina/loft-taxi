@@ -1,7 +1,9 @@
 import { LOG_IN, LOG_OUT } from '../actions';
 
 const initialState = {
-    isLoggedIn: JSON.parse(window.localStorage.getItem('state')).isLoggedIn
+    isLoggedIn: window.localStorage.getItem('state')
+        ? JSON.parse(window.localStorage.getItem('state')).isLoggedIn 
+        : false
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

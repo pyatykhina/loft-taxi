@@ -22,7 +22,7 @@ class Login extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      <div className='form'> 
+      <div className='form login-form'> 
         {this.props.isLoggedIn && < Redirect to='/map' />}
         <h2>Войти</h2>
         Новый пользователь?  <Link to='/checkin'>Зарегистрируйтесь</Link>
