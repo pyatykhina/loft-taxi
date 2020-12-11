@@ -16,6 +16,9 @@ html,
 body,
 #root {
   min-height: 100vh;
+  font-size: 15px;
+  font-weight: 600;
+  color: #323232;
 }
 
 h1,
@@ -42,8 +45,28 @@ p {
 button {
   outline: none;
   border: none;
-  background-color: transparent;
   cursor: pointer;
+
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #323232;
+  background-color: #ffc617;
+
+  &:hover {
+    background-color: #eeb60c;
+  }
+}
+
+a {
+  color: #438feb;
+  text-decoration: none;
+}
+
+#root {
+  background-image: url('../../images/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .wrapper {
@@ -51,6 +74,37 @@ button {
   margin: 0 auto;
 }
 
-main {
-  padding-top: 100px;
+.wrapper, main, section {
+  min-height: 100vh;
+}
+
+.form {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 4px;
+  min-width: 500px;
+  padding: 65px 50px;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.logo {
+  position: absolute;
+  left: 25%;
+  animation: side 1s;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+@keyframes side {
+  from {
+    left: -75%
+  }
+  to {
+    left: 25%
+  }
 }

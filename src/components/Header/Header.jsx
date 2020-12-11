@@ -1,17 +1,13 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logOut } from '../../actions';
 import './Header.scss';
 import { Logo } from 'loft-taxi-mui-theme';
-import { withAuth } from '../../AuthContext';
 
 class Header extends Component {
-  static propTypes = {
-    navigate: PropTypes.func
-  }
-
   unauthenticate = () => {
     this.props.logOut();
-    this.props.navigate('login');
   }
 
   render() {
@@ -22,23 +18,13 @@ class Header extends Component {
           <nav className='header__nav'>
             <ul className='header__nav-list'>
               <li className='header__nav-list-item'>
-                <button onClick={() => {
-                  this.props.navigate('map')}
-                }>
-                  Карта
-                </button>
+                <Link to='/map' className='header__nav-list-item-link'>Карта</Link>
               </li>
               <li className='header__nav-list-item'>
-                <button onClick={() => {
-                  this.props.navigate('profile')}
-                }>
-                  Профиль
-                </button>
+                <Link to='/profile' className='header__nav-list-item-link'>Профиль</Link>
               </li>
               <li className='header__nav-list-item'>
-                <button onClick={this.unauthenticate}>
-                  Выйти
-                </button>
+                <Link to='/' onClick={this.unauthenticate} className='header__nav-list-item-link'>Выйти</Link>
               </li>
             </ul>
           </nav>
@@ -48,4 +34,7 @@ class Header extends Component {
   }
 }
 
-export default withAuth(Header);
+export default connect(
+  null,
+  { logOut }
+)(Header);

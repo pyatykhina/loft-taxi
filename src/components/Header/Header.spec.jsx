@@ -1,23 +1,43 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent  } from '@testing-library/react';
 import Header from './index';
 
+const mockStore = {
+    getState: () => ({auth: {isLoggedIn: false}}),
+    subscribe: () => {},
+    dispatch: () => {}
+}      
+
 describe('Header', () => {
     it('renders correctly', () => {
-        const {container} = render(<Header />);
+        const {container} = render(
+            <BrowserRouter>
+                <Provider store={mockStore}>
+                    <Header />
+                </Provider>
+            </BrowserRouter>
+        );
         expect(container.innerHTML).toMatch('');
     })
 
     describe('when clicked on navigation buttons', () => {
         it('opens the target page', () => {
-            const navigate = jest.fn();
-            const {getByText, container} = render(<Header navigate={navigate} isLoggedIn />);
+            window.location= jest.fn();        
+            const {getByText} = render(
+                <BrowserRouter>
+                    <Provider store={mockStore}>
+                        <Header />
+                    </Provider>
+                </BrowserRouter>
+            );
 
             fireEvent.click(getByText('Карта'));
-            expect(navigate).toHaveBeenCalledWith('map');
+            expect(window.location.pathname).toBe('/map');
 
             fireEvent.click(getByText('Профиль'));
-            expect(navigate).toHaveBeenCalledWith('profile');
+            expect(window.location.pathname).toBe('/profile');
         });
     })
 })
