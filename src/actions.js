@@ -13,9 +13,9 @@ export const authenticate = (email, password) => ({
     type: AUTHENTICATE, 
     payload: {email, password} 
 });
-export const checkin = (email, firsName, lastName, password) => ({ 
+export const checkin = (email, firstName, lastName, password) => ({ 
     type: CHECKIN, 
-    payload: {email, firsName, lastName, password} 
+    payload: {email, firstName, lastName, password} 
 });
 export const setCard = (cardNumber, expiryDate, cardName, cvc, token) => ({
     type: SET_CARD, 
