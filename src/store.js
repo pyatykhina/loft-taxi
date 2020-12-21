@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import { authSaga } from './sagas/authSaga';
 import { regSaga } from './sagas/regSaga';
 import { cardSaga } from './sagas/cardSaga';
+import { addressListSaga } from './sagas/addressListSaga';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -14,3 +15,4 @@ export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(S
 SagaMiddleware.run(authSaga);
 SagaMiddleware.run(regSaga);
 SagaMiddleware.run(cardSaga);
+SagaMiddleware.run(addressListSaga);

@@ -3,6 +3,9 @@ import { LOG_IN, LOG_OUT } from '../actions';
 const initialState = {
     isLoggedIn: window.localStorage.getItem('state')
         ? JSON.parse(window.localStorage.getItem('state')).isLoggedIn 
+        : false,
+    token: window.localStorage.getItem('state')
+        ? JSON.parse(window.localStorage.getItem('state')).token 
         : false
 }
 
@@ -11,15 +14,20 @@ export default function(state=initialState, action) {
     switch(action.type){
         case LOG_IN: {
             window.localStorage.setItem('state', JSON.stringify({
-                isLoggedIn: true
+                isLoggedIn: true,
+                token: action.payload.token
             }));
-            return {isLoggedIn: true}
+            return {
+                isLoggedIn: true,
+                token: action.payload.token
+            }
         }
         case LOG_OUT: {
-            window.localStorage.setItem('state', JSON.stringify({
-                isLoggedIn: false
-            }));
-            return {isLoggedIn: false}
+            window.localStorage.removeItem('state');
+            return {
+                isLoggedIn: false,
+                token: ''
+            }
         }
         default:
             return state;

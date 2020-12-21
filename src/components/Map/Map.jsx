@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
+import { connect } from 'react-redux';
 import './Map.scss';
 import Header from '../Header';
+import NoCardModal from '../NoCardModal';
+import OrderForm from '../OrderForm';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicHlhdHlraGluYSIsImEiOiJja2h6MDF6NjgybGZxMnBrejI0NWFpZ2tpIn0.AG-o6CiLmJ9ssaWs0tLSZA';
 
@@ -11,6 +14,7 @@ class Map extends Component {
     this.map = null;
     this.mapContainer = React.createRef();
   }
+  
   componentDidMount() {
     this.map = new mapboxgl.Map({
       container: this.mapContainer.current,
@@ -25,13 +29,26 @@ class Map extends Component {
   }
 
   render() {
+    const { cardNumber, expiryDate, cardName, cvc } = this.props;
     return (
       <>
         <Header />
         <div ref={this.mapContainer} data-testid="map" className="mapContainer" />
+        {
+          cardNumber && expiryDate && cardName && cvc
+            ? <OrderForm />
+            : <NoCardModal />
+        }
       </>
     );
   }
 }
 
-export default Map;
+export default connect(
+  (state) => ({
+    cardNumber: state.card.cardNumber,
+    expiryDate: state.card.expiryDate,
+    cardName: state.card.cardName,
+    cvc: state.card.cvc
+  }),{}
+)(Map);

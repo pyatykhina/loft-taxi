@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './Profile.scss';
 import Header from '../Header';
 import { connect } from 'react-redux';
-import { setCard, getCard } from '../../actions';
+import { setCard } from '../../actions';
 
 import FormLabel from '@material-ui/core/FormLabel';
 import Input from '@material-ui/core/Input';
@@ -17,14 +17,10 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.props.getCard();
-
-    setTimeout(() => {
-      this.setState({ cardNumber: this.props.cardNumber });
-      this.setState({ expiryDate: this.props.expiryDate });
-      this.setState({ cardName: this.props.cardName });
-      this.setState({ cvc: this.props.cvc })
-    }, 700)
+    this.setState({ cardNumber: JSON.parse(window.localStorage.getItem('card')).cardNumber });
+    this.setState({ expiryDate: JSON.parse(window.localStorage.getItem('card')).expiryDate });
+    this.setState({ cardName: JSON.parse(window.localStorage.getItem('card')).cardName });
+    this.setState({ cvc: JSON.parse(window.localStorage.getItem('card')).cvc })
   }
   
   setCard = e => {
@@ -102,12 +98,6 @@ class Profile extends Component {
 }
 
 export default connect(
-  (state) => ({
-    token: state.auth.token,
-    cardNumber: state.card.cardNumber,
-    expiryDate: state.card.expiryDate,
-    cardName: state.card.cardName,
-    cvc: state.card.cvc
-  }),
-  { setCard, getCard }
+  (state) => ({token: state.auth.token}),
+  { setCard }
 )(Profile);

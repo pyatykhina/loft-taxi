@@ -1,12 +1,13 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { serverSetCard, serverGetCard } from '../api';
-import { SET_CARD, GET_CARD, setCardSuccess, getCardSuccess } from '../actions';
+import { SET_CARD, GET_CARD, setCardSuccess, getCardSuccess, getCard } from '../actions';
 
 export function* setCardSaga(action) {
     const {cardNumber, expiryDate, cardName, cvc, token} = action.payload;
     const success = yield call(serverSetCard, cardNumber, expiryDate, cardName, cvc, token);
     if (success) {
         yield put(setCardSuccess());
+        yield put(getCard(token));
     }
 }
 
