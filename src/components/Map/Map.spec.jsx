@@ -4,6 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import mapboxgl from "mapbox-gl";
 import Map from './index';
+ 
+const mockStore = {
+    getState: () => ({
+        card: {cardNumber:'', expiryDate:'', cardName:'', cvc:''}, 
+        route: {}
+    }),
+    subscribe: () => {},
+    dispatch: () => {}
+}   
 
 jest.mock('mapbox-gl', () => ({
     Map: jest.fn(() => ({ remove: () => {} }))
@@ -11,11 +20,6 @@ jest.mock('mapbox-gl', () => ({
 
 describe('Map', () => {
     it('renders correctly', () => {
-        const mockStore = {
-            getState: () => ({auth: {isLoggedIn: false}}),
-            subscribe: () => {},
-            dispatch: () => {}
-        }
         const { getByTestId } = render(
             <BrowserRouter>
                 <Provider store={mockStore}>

@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import OrderForm from './index';
  
 const mockStore = {
-    getState: () => ({auth: {isLoggedIn: true}}),
+    getState: () => ({addresses: {}}),
     subscribe: () => {},
     dispatch: () => {}
 }   

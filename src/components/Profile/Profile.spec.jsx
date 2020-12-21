@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import Profile from './index';
  
 const mockStore = {
-    getState: () => ({auth: {isLoggedIn: true}}),
+    getState: () => ({auth: {token: ''}}),
     subscribe: () => {},
     dispatch: () => {}
 }   

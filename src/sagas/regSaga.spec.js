@@ -16,7 +16,19 @@ describe('regSaga', () => {
             registrationSaga,
             checkin('testlogin', 'testfirstname', 'testlastname', 'testpassword')
         )
-        expect(dispatched).toEqual([{ type: 'LOG_IN' }])
+        expect(dispatched).toEqual([{ 
+          type: 'LOG_IN',
+          payload: {
+              'token': true
+          } 
+        }, { 
+          type: 'GET_CARD',
+          payload: {
+              'token': true
+          } 
+        }, { 
+          type: 'GET_ADDRESS'
+        }])
       });
     });
 });  

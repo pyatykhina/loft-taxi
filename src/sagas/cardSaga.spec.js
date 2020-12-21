@@ -11,20 +11,25 @@ jest.mock('../api', () => ({
 describe('cardSaga', () => {
     describe('#SET_CARD', () => {
       it('set card data through api', async () => {
-        serverSetCard
-        .mockImplementation(async () => true);
+        serverSetCard.mockImplementation(async () => true);
         const dispatched = await recordSaga(
             setCardSaga,
             setCard('cardNumber', 'expiryDate', 'cardName', 'cvc', 'token')
         )
-        expect(dispatched).toEqual([{ type: 'SET_CARD_SUCCESS' }])
+        expect(dispatched).toEqual([{ 
+          type: 'SET_CARD_SUCCESS'
+        }, { 
+          type: 'GET_CARD',
+          payload: {
+              'token': 'token'
+          } 
+        }])
       });
     });
 
     describe('#GET_CARD', () => {
         it('get card data through api', async () => {
-          serverGetCard
-          .mockImplementation(async () => true);
+          serverGetCard.mockImplementation(async () => true);
           const dispatched = await recordSaga(
               getCardSaga,
               getCard('cardNumber', 'expiryDate', 'cardName', 'cvc', 'token')
