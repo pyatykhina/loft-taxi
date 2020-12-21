@@ -12,6 +12,9 @@ export const GET_CARD_SUCCESS = 'GET_CARD_SUCCESS';
 export const GET_ADDRESS = 'GET_ADDRESS';
 export const GET_ADDRESS_SUCCESS = 'GET_ADDRESS_SUCCESS';
 
+export const GET_ROUTE = 'GET_ROUTE';
+export const GET_ROUTE_SUCCESS = 'GET_ROUTE_SUCCESS';
+
 export const logIn = (token) => ({ 
     type: LOG_IN, 
     payload: {token} 
@@ -53,5 +56,16 @@ export const getAddressSuccess = (data) => ({
     type: GET_ADDRESS_SUCCESS,
     payload: {
         addresses: data.addresses 
+    } 
+});
+
+export const getRoute = (address1, address2) => ({
+    type: GET_ROUTE,
+    payload: {address1, address2} 
+});
+export const getRouteSuccess = (data) => ({ 
+    type: GET_ROUTE_SUCCESS,
+    payload: {
+        route: data
     } 
 });

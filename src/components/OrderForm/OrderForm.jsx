@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './OrderForm.scss';
 import { connect } from 'react-redux';
+import { getRoute } from '../../actions';
 
 import FormLabel from '@material-ui/core/FormLabel';
 
@@ -10,12 +11,18 @@ class OrderForm extends Component {
       dest: ''
     }
 
+    getRoute = e => {
+        e.preventDefault();
+        const { src, dest } = e.target ;
+        this.props.getRoute(src.value, dest.value); 
+    };
+
     render() {
         const { src, dest } = this.state;
         const addresses = this.props.addresses.addresses;
         return (
             <div className='form orderForm-form'>
-                <form className='orderForm'>
+                <form onSubmit={this.getRoute} className='orderForm'>
                     <FormLabel className='orderForm__label'>
                         Откуда:
                         <select 
@@ -51,6 +58,10 @@ class OrderForm extends Component {
     }
 }
 
-export default connect(state => ({
-    addresses: state.addresses.addresses
-}))(OrderForm);
+export default connect(
+    (state) => ({
+        addresses: state.addresses.addresses
+    }),
+    { getRoute }
+)(OrderForm);
+  

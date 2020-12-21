@@ -8,6 +8,39 @@ import OrderForm from '../OrderForm';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicHlhdHlraGluYSIsImEiOiJja2h6MDF6NjgybGZxMnBrejI0NWFpZ2tpIn0.AG-o6CiLmJ9ssaWs0tLSZA';
 
+const drawRoute = (map, coordinates) => {
+  map.getLayer('route') && map.removeLayer('route').removeSource('route');
+
+  map.flyTo({
+    center: coordinates[0],
+    zoom: 13
+  });
+ 
+  map.addLayer({
+    id: 'route',
+    type: 'line',
+    source: {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates
+        }
+      }
+    },
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round'
+    },
+    paint: {
+      'line-color': '#ffc617',
+      'line-width': 8
+    }
+  });
+};
+
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +57,13 @@ class Map extends Component {
     });
   }
 
+  componentDidUpdate() {
+    console.log('componentDidUpdate')
+    if (this.props.coordinates.length > 0) {
+      drawRoute(this.map, this.props.coordinates);
+    }
+  }
+
   componentWillUnmount() {
     this.map.remove(); 
   }
@@ -33,7 +73,7 @@ class Map extends Component {
     return (
       <>
         <Header />
-        <div ref={this.mapContainer} data-testid="map" className="mapContainer" />
+        <div ref={this.mapContainer} data-testid='map' className='mapContainer' />
         {
           cardNumber && expiryDate && cardName && cvc
             ? <OrderForm />
@@ -49,6 +89,7 @@ export default connect(
     cardNumber: state.card.cardNumber,
     expiryDate: state.card.expiryDate,
     cardName: state.card.cardName,
-    cvc: state.card.cvc
+    cvc: state.card.cvc,
+    coordinates: state.route.route
   }),{}
 )(Map);
