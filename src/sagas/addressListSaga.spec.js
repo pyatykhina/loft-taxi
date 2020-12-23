@@ -15,12 +15,10 @@ describe('addressListSaga', () => {
             addressListSaga,
             getAddress()
         )
-        expect(dispatched).toEqual([{ 
+        expect(dispatched).toEqual({ 
           type: 'GET_ADDRESS_SUCCESS',
-          payload: {
-            'addresses': {}
-          } 
-        }])
+          payload: [] 
+        })
       });
     });
 });  

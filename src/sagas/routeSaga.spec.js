@@ -15,12 +15,10 @@ describe('routeSaga', () => {
             routeSaga,
             getRoute('address1', 'address2')
         )
-        expect(dispatched).toEqual([{ 
+        expect(dispatched).toEqual({ 
           type: 'GET_ROUTE_SUCCESS',
-          payload: {
-            'route': {}
-          } 
-        }])
+          payload: []
+        })
       });
     });
 });  

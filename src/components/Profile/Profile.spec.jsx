@@ -5,7 +5,10 @@ import { render } from '@testing-library/react';
 import Profile from './index';
  
 const mockStore = {
-    getState: () => ({auth: {token: ''}}),
+    getState: () => ({
+      card: {cardNumber:'', expiryDate:'', cardName:'', cvc:''}, 
+      auth: {token: ''}
+    }),
     subscribe: () => {},
     dispatch: () => {}
 }   

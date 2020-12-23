@@ -19,7 +19,7 @@ class OrderForm extends Component {
 
     render() {
         const { src, dest } = this.state;
-        const addresses = this.props.addresses.addresses;
+        const addresses = this.props.addresses;
         return (
             <div className='form orderForm-form'>
                 <form onSubmit={this.getRoute} className='orderForm'>

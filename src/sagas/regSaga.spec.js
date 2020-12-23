@@ -18,14 +18,10 @@ describe('regSaga', () => {
         )
         expect(dispatched).toEqual([{ 
           type: 'LOG_IN',
-          payload: {
-              'token': true
-          } 
+          payload: true
         }, { 
           type: 'GET_CARD',
-          payload: {
-              'token': true
-          } 
+          payload: true
         }, { 
           type: 'GET_ADDRESS'
         }])

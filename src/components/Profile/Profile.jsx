@@ -10,17 +10,10 @@ import { MCIcon } from 'loft-taxi-mui-theme';
 
 class Profile extends Component {
   state = {
-    cardNumber: '',
-    expiryDate: '',
-    cardName: '',
-    cvc: ''
-  }
-
-  componentDidMount() {
-    this.setState({ cardNumber: JSON.parse(window.localStorage.getItem('card')).cardNumber });
-    this.setState({ expiryDate: JSON.parse(window.localStorage.getItem('card')).expiryDate });
-    this.setState({ cardName: JSON.parse(window.localStorage.getItem('card')).cardName });
-    this.setState({ cvc: JSON.parse(window.localStorage.getItem('card')).cvc })
+    cardNumber: this.props.cardNumber || '',
+    expiryDate: this.props.expiryDate || '',
+    cardName: this.props.cardName || '',
+    cvc: this.props.cvc || ''
   }
   
   setCard = e => {
@@ -98,6 +91,12 @@ class Profile extends Component {
 }
 
 export default connect(
-  (state) => ({token: state.auth.token}),
+  (state) => ({
+    token: state.auth.token,
+    cardNumber: state.card.cardNumber,
+    expiryDate: state.card.expiryDate,
+    cardName: state.card.cardName,
+    cvc: state.card.cvc
+  }),
   { setCard }
 )(Profile);

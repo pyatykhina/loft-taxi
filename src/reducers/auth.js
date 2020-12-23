@@ -15,11 +15,11 @@ export default function(state=initialState, action) {
         case LOG_IN: {
             window.localStorage.setItem('state', JSON.stringify({
                 isLoggedIn: true,
-                token: action.payload.token
+                token: action.payload
             }));
             return {
                 isLoggedIn: true,
-                token: action.payload.token
+                token: action.payload
             }
         }
         case LOG_OUT: {
