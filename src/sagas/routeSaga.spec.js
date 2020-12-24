@@ -1,4 +1,4 @@
-import { routeSaga } from './routeSaga';
+import { getRouteSaga } from './routeSaga';
 import { recordSaga } from './recordSaga';
 import { getRoute } from '../actions';
 import { serverGetRoute } from '../api';
@@ -12,13 +12,15 @@ describe('routeSaga', () => {
       it('get route through api', async () => {
         serverGetRoute.mockImplementation(async () => true);
         const dispatched = await recordSaga(
-            routeSaga,
-            getRoute('address1', 'address2')
+          getRouteSaga,
+          getRoute('address1', 'address2')
         )
-        expect(dispatched).toEqual({ 
+        expect(dispatched).toEqual([{ 
           type: 'GET_ROUTE_SUCCESS',
-          payload: []
-        })
+          payload: {
+            route: true
+          }
+        }])
       });
     });
 });  

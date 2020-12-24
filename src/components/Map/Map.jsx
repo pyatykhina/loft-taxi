@@ -58,7 +58,7 @@ class Map extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.coordinates.length > 0) {
+    if (this.props.coordinates && this.props.coordinates.length > 0) {
       drawRoute(this.map, this.props.coordinates);
     }
   }

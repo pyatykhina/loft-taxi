@@ -17,7 +17,7 @@ export const GET_ROUTE_SUCCESS = 'GET_ROUTE_SUCCESS';
 
 export const logIn = (token) => ({ 
     type: LOG_IN, 
-    payload: token
+    payload: {token}
  });
 export const logOut = () => ({ type: LOG_OUT });
 export const authenticate = (email, password) => ({ 
@@ -31,17 +31,22 @@ export const checkin = (email, firstName, lastName, password) => ({
 
 export const setCard = (cardNumber, expiryDate, cardName, cvc, token) => ({
     type: SET_CARD, 
-    payload: cardNumber, expiryDate, cardName, cvc, token
+    payload: {cardNumber, expiryDate, cardName, cvc, token}
 });
 export const setCardSuccess = () => ({ type: SET_CARD_SUCCESS });
 
 export const getCard = (token) => ({
     type: GET_CARD, 
-    payload: token
+    payload: {token}
 });
 export const getCardSuccess = (data) => ({ 
     type: GET_CARD_SUCCESS,
-    payload: data
+    payload: {
+        cardNumber: data.cardNumber, 
+        expiryDate: data.expiryDate, 
+        cardName: data.cardName, 
+        cvc: data.cvc
+    } 
 });
 
 export const getAddress = () => ({
@@ -49,14 +54,18 @@ export const getAddress = () => ({
 });
 export const getAddressSuccess = (data) => ({ 
     type: GET_ADDRESS_SUCCESS,
-    payload: data
+    payload: {
+        addresses: data.addresses 
+    } 
 });
 
 export const getRoute = (address1, address2) => ({
     type: GET_ROUTE,
-    payload: address1, address2
+    payload: {address1, address2}
 });
 export const getRouteSuccess = (data) => ({ 
     type: GET_ROUTE_SUCCESS,
-    payload: data
+    payload: {
+        route: data
+    }
 });

@@ -17,10 +17,14 @@ describe('authSaga', () => {
         )
         expect(dispatched).toEqual([{ 
           type: 'LOG_IN',
-          payload: true
+          payload: {
+            token: true
+          }
         }, { 
           type: 'GET_CARD',
-          payload: true
+          payload: {
+            token: true
+          }
         }, { 
           type: 'GET_ADDRESS'
         }])

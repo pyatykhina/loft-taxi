@@ -19,7 +19,10 @@ describe('cardSaga', () => {
         expect(dispatched).toEqual([{ 
           type: 'SET_CARD_SUCCESS'
         }, { 
-          type: 'GET_CARD'
+          type: 'GET_CARD',
+          payload: {
+            token: 'token'
+          }
         }])
       });
     });

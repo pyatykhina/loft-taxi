@@ -1,4 +1,4 @@
-import { addressListSaga } from './addressListSaga';
+import { getAddressListSaga } from './addressListSaga';
 import { recordSaga } from './recordSaga';
 import { getAddress } from '../actions';
 import { serverGetAddress } from '../api';
@@ -12,13 +12,15 @@ describe('addressListSaga', () => {
       it('get addresses through api', async () => {
         serverGetAddress.mockImplementation(async () => true);
         const dispatched = await recordSaga(
-            addressListSaga,
-            getAddress()
+          getAddressListSaga,
+          getAddress()
         )
-        expect(dispatched).toEqual({ 
+        expect(dispatched).toEqual([{ 
           type: 'GET_ADDRESS_SUCCESS',
-          payload: [] 
-        })
+          payload: {
+            addresses: undefined
+          }
+        }])
       });
     });
 });  

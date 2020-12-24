@@ -17,14 +17,15 @@ describe('card', () => {
 
     it('GET_CARD_SUCCESS', () => {
         const action = {
-            type: GET_CARD_SUCCESS
+            type: GET_CARD_SUCCESS,
+            payload: {}
         }
         expect(cardReducer(initialState, action)).toEqual({
             ...initialState,
-            cardNumber: action.payload,
-            expiryDate: action.payload,
-            cardName: action.payload,
-            cvc: action.payload
+            cardNumber: action.payload.cardNumber,
+            expiryDate: action.payload.expiryDate,
+            cardName: action.payload.cardName,
+            cvc: action.payload.cvc
         })
     })
 
