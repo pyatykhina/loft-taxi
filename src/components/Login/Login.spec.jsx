@@ -19,8 +19,8 @@ describe('Login', () => {
             </Provider>
         </BrowserRouter>
       );
-      expect(getByLabelText('Имя пользователя*')).toHaveAttribute('name', 'email');
-      expect(getByLabelText('Пароль*')).toHaveAttribute('name', 'password');
+      expect(getByLabelText('Имя пользователя')).toHaveAttribute('name', 'email');
+      expect(getByLabelText('Пароль')).toHaveAttribute('name', 'password');
     })
 
     describe('when clicked on checkin button', () => {
