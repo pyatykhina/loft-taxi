@@ -17,7 +17,7 @@ export const GET_ROUTE_SUCCESS = 'GET_ROUTE_SUCCESS';
 
 export const logIn = (token) => ({ 
     type: LOG_IN, 
-    payload: {token}
+    payload: token
  });
 export const logOut = () => ({ type: LOG_OUT });
 export const authenticate = (email, password) => ({ 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { connect } from 'react-redux';
+import { getCard, getAddress } from '../../actions';
 import './Map.scss';
 import Header from '../Header';
 import NoCardModal from '../NoCardModal';
@@ -55,6 +56,9 @@ class Map extends Component {
       center: [30.315, 59.940], 
       zoom: 12
     });
+
+    this.props.getCard(this.props.token);
+    this.props.getAddress();
   }
 
   componentDidUpdate() {
@@ -89,6 +93,7 @@ export default connect(
     expiryDate: state.card.expiryDate,
     cardName: state.card.cardName,
     cvc: state.card.cvc,
-    coordinates: state.route.route
-  }),{}
+    coordinates: state.route.route,
+    token: state.auth.token
+  }),{ getCard, getAddress}
 )(Map);

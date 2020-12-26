@@ -8,7 +8,8 @@ import Map from './index';
 const mockStore = {
     getState: () => ({
         card: {cardNumber:'', expiryDate:'', cardName:'', cvc:''}, 
-        route: {}
+        route: {},
+        auth: {token:''}
     }),
     subscribe: () => {},
     dispatch: () => {}

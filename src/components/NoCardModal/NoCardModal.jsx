@@ -8,9 +8,11 @@ class NoCardModal extends Component {
             <form className='form nocard'>
                 <h3 className='nocard__title'>Заполните платежные данные</h3>
                 <h4 className='nocard__subtitle'>Укажите информацию о банковской карте, чтобы сделать заказ.</h4>
-                <button className='nocard__button'>
-                    <Link to='/profile' className='nocard__button-link'>Перейти в профиль</Link>
-                </button>
+                    <Link to='/profile' className='nocard__button-link'>
+                        <button className='nocard__button'>
+                            Перейти в профиль
+                        </button>
+                    </Link>
             </form>
         );
     }

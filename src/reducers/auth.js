@@ -6,7 +6,7 @@ const initialState = {
         : false,
     token: window.localStorage.getItem('state')
         ? JSON.parse(window.localStorage.getItem('state')).token 
-        : false
+        : ''
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
