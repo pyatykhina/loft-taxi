@@ -1,7 +1,6 @@
-import { SET_CARD_SUCCESS, GET_CARD_SUCCESS } from '../actions';
+import { SET_CARD_SUCCESS, GET_CARD_SUCCESS, LOG_OUT } from '../actions';
 
 const initialState = {
-    loggedIn: true,
     cardNumber: '',
     expiryDate: '',
     cardName: '',
@@ -15,12 +14,20 @@ export default function(state=initialState, action) {
             return state;
         }
         case GET_CARD_SUCCESS: {
-            return Object.assign({}, state, {
+            return {
                 cardNumber: action.payload.cardNumber,
                 expiryDate: action.payload.expiryDate,
                 cardName: action.payload.cardName,
                 cvc: action.payload.cvc
-            });    
+            }
+        }
+        case LOG_OUT: {
+            return {
+                cardNumber: '',
+                expiryDate: '',
+                cardName: '',
+                cvc: ''
+            }
         }
         default:
             return state;

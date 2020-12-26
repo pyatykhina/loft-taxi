@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './Profile.scss';
 import Header from '../Header';
 import { connect } from 'react-redux';
-import { setCard, getCard } from '../../actions';
+import { setCard } from '../../actions';
 
 import FormLabel from '@material-ui/core/FormLabel';
 import Input from '@material-ui/core/Input';
@@ -10,21 +10,10 @@ import { MCIcon } from 'loft-taxi-mui-theme';
 
 class Profile extends Component {
   state = {
-    cardNumber: '',
-    expiryDate: '',
-    cardName: '',
-    cvc: ''
-  }
-
-  componentDidMount() {
-    this.props.getCard();
-
-    setTimeout(() => {
-      this.setState({ cardNumber: this.props.cardNumber });
-      this.setState({ expiryDate: this.props.expiryDate });
-      this.setState({ cardName: this.props.cardName });
-      this.setState({ cvc: this.props.cvc })
-    }, 700)
+    cardNumber: this.props.cardNumber || '',
+    expiryDate: this.props.expiryDate || '',
+    cardName: this.props.cardName || '',
+    cvc: this.props.cvc || ''
   }
   
   setCard = e => {
@@ -109,5 +98,5 @@ export default connect(
     cardName: state.card.cardName,
     cvc: state.card.cvc
   }),
-  { setCard, getCard }
+  { setCard }
 )(Profile);
