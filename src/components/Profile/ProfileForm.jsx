@@ -23,22 +23,23 @@ const normalizeCvc = (value) => {
     return value.replace(/\s/g, '').replace(/[^\d]/g, '').substr(0,3) || '';
 }
 
-export const ProfileForm = ({ useDispatchHook = useDispatch }, props) => {
+export const ProfileForm = ({ cardNumber, expiryDate, cardName, cvc, updateCardData, useDispatchHook = useDispatch }) => {
     const dispatch = useDispatchHook();
     const { register, handleSubmit, errors } = useForm({
         mode: 'onBlur',
         reValidateMode: 'onBlur',
         defaultValues: {
-            cardNumber: props.cardNumber,
-            expiryDate: props.expiryDate,
-            cardName: props.className,
-            cvc: props.cvc
+            cardNumber: cardNumber,
+            expiryDate: expiryDate,
+            cardName: cardName,
+            cvc: cvc
         }
     });
 
     const onSubmit = (data) => {
         const { cardNumber, expiryDate, cardName, cvc } = data;
         dispatch(setCard(cardNumber, expiryDate, cardName, cvc));
+        updateCardData(true);
     };
 
     return (

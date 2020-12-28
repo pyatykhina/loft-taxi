@@ -6,8 +6,9 @@ describe('ProfileForm', () => {
     describe('on submit', () => {
       it('dispatches card credentials', async () => {
         const mockDispatch = jest.fn();
+        const updateCardData = jest.fn();
         const { getByLabelText, getByText } = render(
-          <ProfileForm useDispatchHook={() => mockDispatch} />
+          <ProfileForm updateCardData={updateCardData} useDispatchHook={() => mockDispatch} />
         );
 
         const cardNumberInput = getByLabelText('Номер карты:');
