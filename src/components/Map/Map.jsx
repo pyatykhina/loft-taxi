@@ -5,12 +5,15 @@ import { getCard, getAddress } from '../../actions';
 import './Map.scss';
 import Header from '../Header';
 import NoCardModal from '../NoCardModal';
+import NewOrderModal from '../NewOrderModal';
 import OrderForm from '../OrderForm';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicHlhdHlraGluYSIsImEiOiJja2h6MDF6NjgybGZxMnBrejI0NWFpZ2tpIn0.AG-o6CiLmJ9ssaWs0tLSZA';
 
 const drawRoute = (map, coordinates) => {
   map.getLayer('route') && map.removeLayer('route').removeSource('route');
+  
+  if (!coordinates) return; 
 
   map.flyTo({
     center: coordinates[0],
@@ -48,6 +51,10 @@ class Map extends Component {
     this.map = null;
     this.mapContainer = React.createRef();
   }
+
+  state = {
+    makeOrder: false
+  }
   
   componentDidMount() {
     this.map = new mapboxgl.Map({
@@ -67,6 +74,11 @@ class Map extends Component {
     }
   }
 
+  makeOrder = (value) => {
+    this.setState({makeOrder: value})
+    value === false && drawRoute(this.map, [])
+  }
+
   // componentWillUnmount() {
   //   this.map.remove(); 
   // }
@@ -78,9 +90,11 @@ class Map extends Component {
         <Header />
         <div ref={this.mapContainer} data-testid='map' className='mapContainer' />
         {
-          cardNumber && expiryDate && cardName && cvc
-            ? <OrderForm />
-            : <NoCardModal />
+          this.state.makeOrder 
+            ? <NewOrderModal makeOrder={this.makeOrder} />
+            : cardNumber && expiryDate && cardName && cvc
+              ? <OrderForm makeOrder={this.makeOrder} />
+              : <NoCardModal />
         }
       </>
     );
