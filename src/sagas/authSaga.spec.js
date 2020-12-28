@@ -16,8 +16,8 @@ describe('authSaga', () => {
             authenticate('testlogin', 'testpassword')
         )
         expect(dispatched).toEqual([{ 
-          type: 'LOG_IN',
-          payload: true
+          type: 'LOG_IN_ERROR',
+          payload: undefined
         }])
       });
     });

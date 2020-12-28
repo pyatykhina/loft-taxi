@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT } from '../actions';
+import { LOG_IN, LOG_OUT, LOG_IN_ERROR } from '../actions';
 
 const initialState = {
     isLoggedIn: window.localStorage.getItem('state')
@@ -19,14 +19,23 @@ export default function(state=initialState, action) {
             }));
             return {
                 isLoggedIn: true,
-                token: action.payload
+                token: action.payload,
+                error: ''
+            }
+        }
+        case LOG_IN_ERROR: {
+            return {
+                isLoggedIn: false,
+                token: '',
+                error: action.payload
             }
         }
         case LOG_OUT: {
             window.localStorage.removeItem('state');
             return {
                 isLoggedIn: false,
-                token: ''
+                token: '',
+                error: ''
             }
         }
         default:

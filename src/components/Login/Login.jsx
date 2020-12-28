@@ -11,6 +11,7 @@ class Login extends Component {
         {this.props.isLoggedIn && < Redirect to='/map' />}
         <h2>Войти</h2>
         Новый пользователь?  <Link to='/checkin'>Зарегистрируйтесь</Link>
+        {this.props.error && <p className='form-error' style={{marginTop: '15px', marginBottom: '-20px'}}>{this.props.error}</p>}   
         <LoginForm />
       </div>
     );
@@ -18,5 +19,8 @@ class Login extends Component {
 }
 
 export default connect(
-  (state) => ({isLoggedIn: state.auth.isLoggedIn}),{}
+  (state) => ({
+    isLoggedIn: state.auth.isLoggedIn,
+    error: state.auth.error
+  }),{}
 )(Login);
