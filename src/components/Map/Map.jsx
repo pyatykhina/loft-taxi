@@ -61,7 +61,7 @@ class Map extends Component {
       container: this.mapContainer.current,
       style: 'mapbox://styles/pyatykhina/ckhz0q8o112of19qqobazgwvx',
       center: [30.315, 59.940], 
-      zoom: 12
+      zoom: 13
     });
 
     this.props.getCard(this.props.token);

@@ -1,6 +1,6 @@
 .nocard {
-    left: 50%;
-    transform: translate(-120%, 100px);
+    left: calc((100vw - 1170px) / 2);
+    transform: translateY(100px);
     max-width: 30%;
     min-width: 0;
     padding: 44px 60px;
