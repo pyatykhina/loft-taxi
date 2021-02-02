@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { setCard } from '../../actions'; 
@@ -25,7 +25,7 @@ const normalizeCvc = (value) => {
 
 export const ProfileForm = ({ cardNumber, expiryDate, cardName, cvc, updateCardData, useDispatchHook = useDispatch }) => {
     const dispatch = useDispatchHook();
-    const { register, handleSubmit, errors } = useForm({
+    const { register, handleSubmit, errors, reset } = useForm({
         mode: 'onBlur',
         reValidateMode: 'onBlur',
         defaultValues: {
@@ -36,6 +36,15 @@ export const ProfileForm = ({ cardNumber, expiryDate, cardName, cvc, updateCardD
         }
     });
 
+    useEffect(() => {
+        reset({
+            cardNumber: cardNumber,
+            expiryDate: expiryDate,
+            cardName: cardName,
+            cvc: cvc
+        });
+    }, [reset, cardNumber, expiryDate, cardName, cvc]);
+    
     const onSubmit = (data) => {
         const { cardNumber, expiryDate, cardName, cvc } = data;
         dispatch(setCard(cardNumber, expiryDate, cardName, cvc));
