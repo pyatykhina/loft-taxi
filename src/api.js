@@ -10,7 +10,7 @@ export const serverLogin = async(email, password) => {
         }
     })
         .then(res => res.json())
-        .then(data => data.token)
+        .then(data => data)
 }
 
 export const serverCheckin = async(email, firstName, lastName, password) => {

@@ -15,6 +15,7 @@ class OrderForm extends Component {
         e.preventDefault();
         const { src, dest } = e.target ;
         this.props.getRoute(src.value, dest.value); 
+        this.props.makeOrder(true);
     };
 
     render() {

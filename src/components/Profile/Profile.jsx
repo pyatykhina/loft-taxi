@@ -1,90 +1,37 @@
 import { Component } from 'react';
 import './Profile.scss';
 import Header from '../Header';
+import { getCard } from '../../actions';
 import { connect } from 'react-redux';
-import { setCard } from '../../actions';
-
-import FormLabel from '@material-ui/core/FormLabel';
-import Input from '@material-ui/core/Input';
-import { MCIcon } from 'loft-taxi-mui-theme';
+import { ProfileForm } from './ProfileForm';
+import GoToMapModal from '../GoToMapModal';
 
 class Profile extends Component {
   state = {
-    cardNumber: this.props.cardNumber || '',
-    expiryDate: this.props.expiryDate || '',
-    cardName: this.props.cardName || '',
-    cvc: this.props.cvc || ''
+    updateCardData: false
   }
-  
-  setCard = e => {
-    e.preventDefault();
-    const {cardNumber, expiryDate, cardName, cvc} = e.target ;
-    this.props.setCard(cardNumber.value, expiryDate.value, cardName.value, cvc.value); 
-  };
+
+  componentDidMount() {
+    this.props.getCard(this.props.token);
+  }
+
+  updateCardData = (value) => {
+    value === true && this.setState({updateCardData: value})
+  }
 
   render() {
-    const { cardNumber, expiryDate, cardName, cvc } = this.state;
     return (
       <>
       <Header />
-      <div className='form profile-form'> 
-        <h2 style={{marginBottom:'10px'}}>Профиль</h2>
-        Способ оплаты
-        <form onSubmit={this.setCard} className='profile'>
-          <div className='profile__subforms'>
-            <div className='profile__subforms-item'>
-              <MCIcon className='mastercard-icon'/>
-              <FormLabel className='profile__label'>
-                Номер карты:
-                <Input 
-                  className='profile__input'
-                  placeholder='0000 0000 0000 0000'
-                  type='text'
-                  name='cardNumber'
-                  value={cardNumber} 
-                  onChange={e => this.setState({ cardNumber: e.target.value })} 
-                />
-              </FormLabel>
-              <FormLabel className='profile__label' style={{width:'40%'}}>
-                Срок действия:
-                <Input 
-                  className='profile__input'
-                  placeholder='12/20'
-                  type='text'
-                  name='expiryDate'
-                  value={expiryDate} 
-                  onChange={e => this.setState({ expiryDate: e.target.value })} 
-                />
-              </FormLabel>
+      {
+        this.state.updateCardData 
+          ? <GoToMapModal />
+          : <div className='form profile-form'> 
+              <h2 style={{marginBottom:'10px'}}>Профиль</h2>
+              Способ оплаты
+              <ProfileForm updateCardData={this.updateCardData} {...this.props}/>
             </div>
-            <div className='profile__subforms-item'>
-              <FormLabel className='profile__label'>
-                Имя владельца:
-                <Input 
-                  className='profile__input'
-                  placeholder='USER NAME'
-                  type='text'
-                  name='cardName'
-                  value={cardName} 
-                  onChange={e => this.setState({ cardName: e.target.value })} 
-                />
-              </FormLabel>
-              <FormLabel className='profile__label' style={{width:'40%'}}>
-                CVC:
-                <Input 
-                  className='profile__input'
-                  placeholder='***'
-                  type='text'
-                  name='cvc'
-                  value={cvc} 
-                  onChange={e => this.setState({ cvc: e.target.value })} 
-                />
-              </FormLabel>
-            </div>
-          </div>
-          <button type='submit' className='profile__button'>Сохранить</button>
-        </form>
-      </div>
+      }
       </>
     );
   }
@@ -98,5 +45,5 @@ export default connect(
     cardName: state.card.cardName,
     cvc: state.card.cvc
   }),
-  { setCard }
+  { getCard }
 )(Profile);

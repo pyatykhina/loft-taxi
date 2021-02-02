@@ -82,7 +82,7 @@ a {
   position: absolute;
   background-color: #fff;
   border-radius: 4px;
-  min-width: 500px;
+  min-width: 490px;
   padding: 65px 50px;
   box-sizing: border-box;
 }
@@ -107,4 +107,10 @@ h2 {
   to {
     left: 25%
   }
+}
+
+.form-error {
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
 }

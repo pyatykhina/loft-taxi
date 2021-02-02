@@ -1,4 +1,4 @@
-.nocard {
+.neworder {
     left: calc((100vw - 1170px) / 2);
     transform: translateY(100px);
     max-width: 30%;
@@ -10,12 +10,6 @@
 
     &__title {
         font-size: 38px;
-        font-weight: 400;
-        margin-bottom: 30px;
-    }
-
-    &__subtitle {
-        font-size: 16px;
         font-weight: 400;
         margin-bottom: 30px;
     }

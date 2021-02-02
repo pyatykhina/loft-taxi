@@ -32,7 +32,7 @@ describe('Map', () => {
             container: getByTestId('map'),
             style: "mapbox://styles/pyatykhina/ckhz0q8o112of19qqobazgwvx",
             center: [30.315, 59.940],
-            zoom: 12
+            zoom: 13
         });
     })
 })

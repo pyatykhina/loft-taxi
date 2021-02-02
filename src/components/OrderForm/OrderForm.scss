@@ -1,6 +1,6 @@
 .orderForm-form {
-    left: 50%;
-    transform: translate(-120%, 100px);
+    left: calc((100vw - 1170px) / 2);
+    transform: translateY(100px);
     min-width: 488px;
     padding: 42px 48px;
 }
