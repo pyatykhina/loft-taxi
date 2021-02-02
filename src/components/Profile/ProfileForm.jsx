@@ -23,7 +23,7 @@ const normalizeCvc = (value) => {
     return value.replace(/\s/g, '').replace(/[^\d]/g, '').substr(0,3) || '';
 }
 
-export const ProfileForm = ({ cardNumber, expiryDate, cardName, cvc, updateCardData, useDispatchHook = useDispatch }) => {
+export const ProfileForm = ({ cardNumber, expiryDate, cardName, cvc, token, updateCardData, useDispatchHook = useDispatch }) => {
     const dispatch = useDispatchHook();
     const { register, handleSubmit, errors, reset } = useForm({
         mode: 'onBlur',
@@ -47,7 +47,7 @@ export const ProfileForm = ({ cardNumber, expiryDate, cardName, cvc, updateCardD
     
     const onSubmit = (data) => {
         const { cardNumber, expiryDate, cardName, cvc } = data;
-        dispatch(setCard(cardNumber, expiryDate, cardName, cvc));
+        dispatch(setCard(cardNumber, expiryDate, cardName, cvc, token));
         updateCardData(true);
     };
 
