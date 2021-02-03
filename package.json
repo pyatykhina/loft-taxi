@@ -2,6 +2,7 @@
   "name": "loft-taxi",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tanyapyat.github.io/loft-taxi/",
   "dependencies": {
     "@material-ui/core": "^4.11.1",
     "@testing-library/jest-dom": "^5.11.4",
@@ -26,7 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "commit": "cz"
+    "commit": "cz",
+    "deploy": "react-scripts build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -47,7 +49,8 @@
     ]
   },
   "devDependencies": {
-    "cz-conventional-changelog": "3.3.0"
+    "cz-conventional-changelog": "3.3.0",
+    "gh-pages": "^3.1.0"
   },
   "config": {
     "commitizen": {

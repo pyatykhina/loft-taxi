@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { render  } from '@testing-library/react';
 import App from './index';
 
@@ -14,11 +14,11 @@ describe('App', () => {
             dispatch: () => {}
         }         
         const {container} = render(
-            <BrowserRouter>
+            <HashRouter>
                 <Provider store={mockStore}>
                     <App />
                 </Provider>
-            </BrowserRouter>
+            </HashRouter>
         );
         expect(container.innerHTML).toMatch('Login component');
     })
